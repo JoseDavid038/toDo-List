@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do-List</title>
+    <link rel="icon" href="assets/favicon todoList.png" type="image/x-icon">
+  </head>
+  <style>
+
+    :root{
+      font-family: arial;
+    }
+
+    header{
+      display: flex;
+      flex-direction: row;
+      background-color: #FAF2DB;
+      justify-content: center;
+      padding-bottom: 10px;
+      width: 100%;
+    }
+
+    .title{
+      font-weight: bold;
+      font-size: 30px;
+      margin-right: 20px;
+    }
+
+    .todoList-image{
+      width: 80px;
+      height: 80px;
+    }
+
+    .main{
+      display: grid;
+      grid-template-columns: 300px 1fr;
+    }
+
+    .menu{
+      background-color: #FBA56A;
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .choose{
+      font-weight: bolder;
+      background-color: #f9883c;
+      padding: 10px 95px; 
+    }
+
+    .workspace{
+      background-color: #F9E9BE;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 325px 150px 100px;
+      column-gap: 10px ;
+      row-gap: 10px;
+      margin-top: 20px;
+      margin-left: 200px;
+    }
+
+    input{
+      padding: 10px;
+    }
+
+    .task-input{
+      width: 300px;
+    }
+
+    button{
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 10px 25px;
+    }
+
+    .button-add{
+      background-color: #708E99;
+      color: white;
+    }
+
+    .button-delete{
+      background-color: #CFD1CF;
+      color: white;
+    }
+
+    .grid-task-div{
+      display: grid;
+      grid-template-columns: 30px 290px 145px 100px;
+      column-gap: 10px ;
+      row-gap: 10px;
+    }
+    
+    .task-div{
+      align-content: center;
+    }
+
+    .is-completed{
+      text-decoration: line-through;
+    }
+
+  </style>
+  <body>
+
+    <header>
+     
+        <p class="title">To-Do List</p>
+        <img class=todoList-image src="assets/todoList.png" alt="">
+
+    </header>
+    <section class="main">
+
+      <div class="menu">
+
+        <p class="choose">New Task</p>
+        <p>Today</p>
+        <p>Tomorrow</p>
+        <p>This week</p>
+        <p>Completed</p>
+
+      </div>
+      <div class="workspace">
+        <div class="grid">
+          <input type="text" placeholder="Add your task" class="js-task-input task-input">
+          <input type="date" class="js-date-input">
+          <button class="button-add" onclick="taskStore()">Add</button>
+          <div class="js-task-div grid-task-div"></div>
+        </div>  
+      </div>
+
+    </section>   
+
+    <script>
+
+      let arrayTask = JSON.parse(localStorage.getItem('arrayTask'))||[];
+      renderHTML();
+
+      function renderHTML(){
+        let taskHTML = '';
+
+        for (let i = 0; i < arrayTask.length; i++){
+          let arrayPosition = arrayTask[i];
+          let {name,dueDate,completed} = arrayPosition;
+          let taskState = completed ? 'is-completed' : '';
+          let html = `<input type='checkbox' class='js-checkbox' onclick="completedTask(${i})" ${completed ? 'checked':''}>
+          <div class='task-div js-name-div ${taskState}'>${name}</div>
+          <div class='task-div js-dueDate-div ${taskState}'>${dueDate}</div>
+          <button class='button-delete' onclick="deleteTask(${i})">Delete</button>`;
+          taskHTML+=html;
+        }
+        document.querySelector('.js-task-div').innerHTML = taskHTML;
+       
+      }
+
+      function taskStore(){
+
+        let name = document.querySelector('.js-task-input').value;
+        let dueDate = document.querySelector('.js-date-input').value;
+
+        if (name !== ''){
+          arrayTask.push({
+          name,
+          dueDate,
+          completed : false
+          })
+        }else{
+          alert('You should enter dates.');
+        }
+        
+
+        console.log(arrayTask);
+        document.querySelector('.js-task-input').value = '';
+        document.querySelector('.js-date-input').value = '';
+        document.querySelector('.js-task-input').focus();
+        renderHTML();
+        localStorage.setItem('arrayTask',JSON.stringify(arrayTask));
+       
+      }
+
+      function completedTask(task){
+
+        // console.log(task);
+        // let seleccion = document.querySelectorAll('.js-checkbox');
+        // console.log(seleccion);
+        let seleccion = document.querySelectorAll('.js-checkbox')[task];
+        let nameDiv = document.querySelectorAll('.js-name-div')[task];
+        let dueDateDiv = document.querySelectorAll('.js-dueDate-div')[task];
+        if (seleccion.checked == true){
+          nameDiv.classList.add('is-completed');
+          dueDateDiv.classList.add('is-completed');
+          arrayTask[task].completed = true;
+          console.log(arrayTask);
+        }else if (seleccion.checked == false){
+          nameDiv.classList.remove('is-completed');
+          dueDateDiv.classList.remove('is-completed');
+          arrayTask[task].completed = false;
+        }
+        localStorage.setItem('arrayTask',JSON.stringify(arrayTask));
+      }
+
+      function deleteTask(task){
+        arrayTask[task].completed = false;
+        arrayTask.splice(task,1);
+        localStorage.setItem('arrayTask',JSON.stringify(arrayTask));
+        if (arrayTask ==''){
+          localStorage.removeItem('arrayTask');
+        }
+        renderHTML();
+      }
+     
+
+
+
+    </script>
+  </body>
+</html>
