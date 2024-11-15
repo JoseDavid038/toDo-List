@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard - toDoList </title>
+  </head>
+
+  <style>
+    :root{
+      font-family: arial;
+    }
+
+    p{
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      background-color: #efebfb;
+      margin: 0;
+    }
+
+    .dashboard{
+      display: flex;
+      flex-direction: row;
+    }
+
+    .sidebar{
+      background-color: white;
+      width: 250px;
+      height: 100vh;
+     
+    }
+    
+    .main-dashboard{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .header{
+      background-color: white;
+      width: 100%;
+      height: 100px;
+      margin-bottom: 20px;
+      
+    }
+    
+    .task-inputs-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-content: center;
+      margin-top: 30px;
+      margin-left: 20px;
+      column-gap: 10px;
+    }
+
+    .task-inputs{
+      padding: 10px 15px;
+    }
+
+    .task-input-first{
+      width: 200px;
+    }
+    
+    .button-task{
+      padding: 10px 35px;
+      cursor: pointer;
+      background-color: #4A8AF7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .delete-button{
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .delete-image-button{
+      width: 15px;
+      object-fit: cover;
+
+    }
+
+    .totals{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr ;
+      grid-column:  span 4 / span 4;
+      margin-left: 20px;
+    }
+
+    .card-task{
+      background-color: white;
+      width: 300px;
+      height: 140px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 10px;
+
+    }
+
+    .left-card{
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .achievement{
+      font-weight: bold;
+      font-size: 10px;
+      padding: 5px 8px;
+      margin-top: 10px;
+      margin-left: 20px;
+      margin-bottom: 50px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .achievement-high{
+      background-color: #CAF4E3;
+      color: #0CD47A;
+      font-weight: bold;
+    }
+
+    .achievement-low{
+      background-color: #FCD0D5;
+      color: #FC2933;
+      font-weight: bold;
+    }
+
+    .category{
+      color: gray;
+      font-size: 12px;
+      margin-left: 20px;
+      margin-bottom: 5px;
+    }
+
+    .category-title{
+      margin-left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .right-card{
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+    }
+
+    .achievement-image{
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      margin-bottom: 5px;
+
+    }
+
+    .grafics{
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      margin-top: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+      column-gap: 20px;
+    }
+
+    .task-grafic-card{
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 20px;
+      max-height: 200px;
+      /* grid-column:  span 2 / span 4; */
+    }
+
+    .todoList-container{
+      width: 100%;
+      /* height: auto; */
+      min-height: 400px;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    .task-title{
+      font-weight: 900;
+      margin-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .table-title{
+      display: grid;
+      grid-template-columns: 40px 270px 70px 140px 80px;
+      column-gap: 10px;
+      row-gap: 10px;
+      margin-top: 5px;
+      margin-left: 30px;
+      font-weight: 5500;
+      font-size: 14px;
+    }
+
+    .todoList{
+      display: grid;
+      grid-template-columns: 30px 290px 70px 145px 120px;
+      column-gap: 10px;
+      row-gap: 10px;
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+
+    .grafic-card{
+      width: 100%;
+      height: 190px;
+      background-color: white;
+      border-radius: 10px;
+      /* grid-column:  span 1 / span 4; */
+    }
+
+    .is-completed{
+      text-decoration: line-through;
+    }
+ 
+
+
+  </style>
+  <body>
+    
+    <section class="dashboard">
+
+      <div class="sidebar">
+
+        <img src="" alt="">
+        <p>to-Do-List</p>
+
+        <button><img src="" alt="">Dashboard</button>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+        <p><img src="" alt=""></p>
+
+        <button><img src="" alt="">Light</button>
+        <button><img src="" alt="">Dark</button>
+
+      </div>
+
+      <section class="main-dashboard">
+        <header class="header">
+
+          <div class="task-inputs-container">
+            <input class='js-task-input task-inputs task-input-first' type="text" placeholder="Add your task" maxlength= '38'>
+            <select class='js-category-input task-inputs' name="category-task" id="category-task">
+              <option value="">--Choose a category--</option>
+              <option value="healthy">Healthy</option>
+              <option value="learning">Learning</option>
+              <option value="financial">Financial</option>
+              <option value="family">Family</option>
+            </select>
+            <input class='js-date-input task-inputs' type="date">
+            <button class="button-task" onclick="taskStore()">Add</button>
+          </div>
+
+        </header>
+
+        <div class="totals">
+
+          <div class="card-task">
+
+            <div class="left-card">
+              <p class="achievement achievement-high">5/8 Completed</p>
+              <p class="category">Category</p>
+              <p class="category-title">Healthy</p>
+            </div>
+            <div class="right-card">
+
+              <p></p>
+              <img class='achievement-image'src="assets/achievement.png" alt="">
+            
+            </div>
+
+          </div>
+
+          <div class="card-task">
+
+            <div class="left-card">
+              <p class="achievement achievement-low">2/8 Completed</p>
+              <p class="category">Category</p>
+              <p class="category-title">Learning</p>
+            </div>
+            <div class="right-card">
+
+              <p></p>
+              <img class='achievement-image'src="assets/achievement.png" alt="">
+
+            </div>
+
+          </div>
+
+          <div class="card-task">
+
+            <div class="left-card">
+              <p class="achievement achievement-high">4/8 Completed</p>
+              <p class="category">Category</p>
+              <p class="category-title">Financial</p>
+            </div>
+            <div class="right-card">
+
+              <p></p>
+              <img class='achievement-image'src="assets/achievement.png" alt="">
+
+            </div>
+
+          </div>
+
+          <div class="card-task">
+
+            <div class="left-card">
+              <p class="achievement achievement-low">1/8 Completed</p>
+              <p class="category">Category</p>
+              <p class="category-title">Family</p>
+            </div>
+            <div class="right-card">
+
+              <p></p>
+              <img class='achievement-image'src="assets/achievement.png" alt="">
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="grafics">
+
+          <div class="todoList-container">
+            <p class="task-title">To-Do-List</p>
+            <div class="table-title">
+            <p>Done</p>
+            <p>Task</p>
+            <p>Category</p>
+            <p>Due Date</p>
+            </div>
+            <hr>
+            <div class="js-div-todoList todoList">
+            </div>
+          </div>
+
+          <div class="task-grafic-card">
+            <div class="grafic-card">
+              <p>Grafic bar</p>
+            </div>
+            <div class="grafic-card">
+              <p>Grafic circle </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <script>
+
+      
+
+
+      
+
+    </script>
+
+  </body>
+</html>
